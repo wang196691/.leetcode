@@ -12,7 +12,7 @@ public:
         std::ranges::sort(nums);
         // std::sort(nums.begin(), nums.end(), std::greater<int>()) //降序排序
         // std::sort(nums.begin(), nums.end(), [](int a, int b){
-        //     return a < b;
+        //     return a < b; // 升序排序
         // });
         vector<vector<int>> ans;
         int n = nums.size();
@@ -20,9 +20,12 @@ public:
             int x = nums[i];
             if (i > 0 && nums[i] == nums[i - 1])
                 continue;
-            if (x + nums[i + 1]+ nums[i +2] > 0)    break;
-            if (x + nums[n - 1] + nums[n - 2] < 0) continue;
+
+            if (x + nums[i + 1]+ nums[i +2] > 0) break;  //剪枝1
+            if (x + nums[n - 1] + nums[n - 2] < 0) continue;  //剪枝2
+
             int j = i +1, k = n -1;
+            
             while (j < k){
                 int temp = x + nums[j] + nums[k];
                 if (temp < 0){
