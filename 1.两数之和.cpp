@@ -10,10 +10,11 @@ public:
     vector<int> twoSum(vector<int>& nums, int target) {
         unordered_map<int, int> map;
         for (int i = 0; i < nums.size(); i++){
-            if (map.find(target - nums[i]) != map.end()){
-                return {map[target-nums[i]], i};
+            auto it = map.find(target - nums[i]);
+            if (it != map.end()){
+                return {it->second, i};
             }
-            map[nums[i]] = i;
+            map.insert({nums[i], i});
         }
         return {};
     }
